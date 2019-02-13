@@ -21,7 +21,7 @@ public class KnightBoard {
         if (board.length*board[0].length >= 10){
           if (board[i][j] < 10){
             if (board[i][j] == 0) {
-              s += "__ ";
+              s += " _ ";
             } else {
               s += " " + board[i][j]+" ";
             }
@@ -61,7 +61,14 @@ public class KnightBoard {
       return false;
     }
     board[row][col] = level;
-
+    for (int i = -2; i < 3; i++){
+      for (int j = -2; j < 3; j++){
+        if (i != 0 && j != 0){
+          return solveH(row+i,col+j,level+1);
+        }
+      }
+    }
+    return false;
   }
 
   public static void main(String[] args){
