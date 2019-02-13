@@ -20,10 +20,18 @@ public class KnightBoard {
       for (int j = 0; j < board[0].length; j++){
         if (board.length*board[0].length >= 10){
           if (board[i][j] < 10){
-            s += "_" + board[i][j]+" ";
+            if (board[i][j] == 0) {
+              s += " _ ";
+            } else {
+              s += " " + board[i][j]+" ";
+            }
           }
         }
-        s += board[i][j] + " ";
+        if (board[i][j] == 0) {
+          s += " _ ";
+        } else {
+          s += board[i][j]+" ";
+        }
       }
       s += "\n";
     }
@@ -32,6 +40,7 @@ public class KnightBoard {
 
   public static void main(String[] args){
     KnightBoard test = new KnightBoard(3,3);
+    System.out.println(test);
   }
 
 }
