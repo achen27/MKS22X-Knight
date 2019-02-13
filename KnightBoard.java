@@ -7,7 +7,11 @@ public class KnightBoard {
       throw new IllegalArgumentException("Negative Parameters");
     }
     board = new int[startingRows][startingCols];
-    //for (int i = 0; i < startingRows)
+    for (int i = 0; i < startingRows; i++){
+      for (int j = 0; j < startingCols; j++){
+        board[i][j] = 0;
+      }
+    }
   }
 
 }
