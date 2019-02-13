@@ -21,14 +21,14 @@ public class KnightBoard {
         if (board.length*board[0].length >= 10){
           if (board[i][j] < 10){
             if (board[i][j] == 0) {
-              s += " _ ";
+              s += "__ ";
             } else {
               s += " " + board[i][j]+" ";
             }
           }
         }
         if (board[i][j] == 0) {
-          s += " _ ";
+          s += "_ ";
         } else {
           s += board[i][j]+" ";
         }
