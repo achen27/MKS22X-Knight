@@ -48,7 +48,9 @@ public class KnightBoard {
   }
 
   private boolean solveH(int row ,int col, int level){
-
+    if (level > board.length * board[0].length){
+      return true;
+    }
   }
 
   public static void main(String[] args){
