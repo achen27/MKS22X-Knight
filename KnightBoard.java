@@ -51,6 +51,17 @@ public class KnightBoard {
     if (level > board.length * board[0].length){
       return true;
     }
+    if (row > board.length - 1 || col > board.length - 1){
+      return false;
+    }
+    if (row < 0 || col  < 0){
+      return false;
+    }
+    if (board[row][col] != 0){
+      return false;
+    }
+    board[row][col] = level;
+
   }
 
   public static void main(String[] args){
