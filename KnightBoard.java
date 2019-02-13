@@ -14,4 +14,24 @@ public class KnightBoard {
     }
   }
 
+  public String toString(){
+    String s = "";
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[0].length; j++){
+        if (board.length*board[0].length >= 10){
+          if (board[i][j] < 10){
+            s += "_" + board[i][j]+" ";
+          }
+        }
+        s += board[i][j] + " ";
+      }
+      s += "\n";
+    }
+    return s;
+  }
+
+  public static void main(String[] args){
+    KnightBoard test = new KnightBoard(3,3);
+  }
+
 }
