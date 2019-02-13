@@ -38,6 +38,19 @@ public class KnightBoard {
     return s;
   }
 
+  /**
+  *@throws IllegalStateException when the board contains non-zero values.
+  *@throws IllegalArgumentException when either parameter is negative or out of bounds.
+  *@return true when the board is solvable from the specified starting position
+  */
+  public boolean solve(int startingRow, int startingCol){
+    return solveH(startingRow, startingCol, 1);
+  }
+
+  private boolean solveH(int row ,int col, int level){
+
+  }
+
   public static void main(String[] args){
     KnightBoard test = new KnightBoard(3,3);
     System.out.println(test);
