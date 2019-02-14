@@ -50,14 +50,14 @@ public class KnightBoard {
         }
       }
     }
-    if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board.length - 1){
+    if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board[0].length - 1){
       throw new IllegalArgumentException();
     }
     return solveH(startingRow, startingCol, 1);
   }
 
   private boolean addKnight(int row ,int col, int level){
-    if (row < 0 || row > board.length - 1 || col < 0 || col > board.length - 1){
+    if (row < 0 || row > board.length - 1 || col < 0 || col > board[0].length - 1){
       return false;
     }
     if (board[row][col] == 0){
@@ -68,7 +68,7 @@ public class KnightBoard {
   }
 
   private boolean removeKnight(int row ,int col){
-    if (row < 0 || row > board.length - 1 || col < 0 || col > board.length - 1){
+    if (row < 0 || row > board.length - 1 || col < 0 || col > board[0].length - 1){
       return false;
     }
     board[row][col] = 0;
