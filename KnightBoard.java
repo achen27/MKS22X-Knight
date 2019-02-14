@@ -63,8 +63,17 @@ public class KnightBoard {
     }
     if (board[row][col] == 0){
       board[row][col] = level;
+      return true;
     }
     return false;
+  }
+
+  private boolean removeKnight(int row ,int col, int level){
+    if (row < 0 || row > board.length - 1 || col < 0 || col > board.length - 1){
+      return false;
+    }
+    board[row][col] = 0;
+    return true;
   }
 
   private boolean solveH(int row ,int col, int level){
