@@ -20,17 +20,16 @@ public class KnightBoard {
       for (int j = 0; j < board[0].length; j++){
         if (board.length*board[0].length >= 10){
           if (board[i][j] < 10){
-            if (board[i][j] == 0) {
-              s += " _ ";
-            } else {
-              s += " " + board[i][j]+" ";
-            }
+            s += " " + board[i][j]+" ";
+          } else {
+            s += board[i][j]+" ";
           }
-        }
-        if (board[i][j] == 0) {
-          s += "_ ";
         } else {
-          s += board[i][j]+" ";
+          if (board[i][j] == 0) {
+            s += "_ ";
+          } else {
+            s += board[i][j]+" ";
+          }
         }
       }
       s += "\n";
