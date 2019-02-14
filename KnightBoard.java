@@ -83,44 +83,76 @@ public class KnightBoard {
     System.out.println(this.toString());
 
     if(addKnight(row+1,col+2,level+1)){
-      return solveH(row+1,col+2,level+1);
+      row += 1;
+      col += 2;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row+1,col+2);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row+1,col-2,level+1)){
-      return solveH(row+1,col-2,level+1);
+      row += 1;
+      col -= 2;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row+1,col-2);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row+2,col+1,level+1)){
-      return solveH(row+2,col+1,level+1);
+      row += 2;
+      col += 1;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row+2,col+1);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row+2,col-1,level+1)){
-      return solveH(row+2,col-1,level+1);
+      row += 2;
+      col -= 1;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row+2,col-1);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row-1,col+2,level+1)){
-      return solveH(row-1,col+2,level+1);
+      row -= 1;
+      col += 2;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row-1,col+2);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row-1,col-2,level+1)){
-      return solveH(row-1,col-2,level+1);
+      row -= 1;
+      col -= 2;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row-1,col-2);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row-2,col+1,level+1)){
-      return solveH(row-2,col+1,level+1);
+      row -= 2;
+      col += 1;
+      level++;
+      return solveH(row,col,level);
     }
-    removeKnight(row-2,col+1);
+    removeKnight(row,col);
+    level--;
 
     if(addKnight(row-2,col-1,level+1)){
+      row -= 2;
+      col -= 1;
+      level++;
       return solveH(row-2,col-1,level+1);
     }
-    removeKnight(row-2,col-1);
+    removeKnight(row,col);
+    level--;
 
     return false;
   }
