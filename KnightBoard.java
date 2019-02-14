@@ -78,26 +78,18 @@ public class KnightBoard {
 
   private boolean solveH(int row ,int col, int level){
     if (level > board.length * board[0].length){
+      System.out.println("");
       return true;
-    }
-    if (row > board.length - 1 || col > board.length - 1){
-      return false;
-    }
-    if (row < 0 || col  < 0){
-      return false;
-    }
-    if (board[row][col] != 0){
-      return false;
     }
     board[row][col] = level;
     System.out.println(this.toString());
     for (int i = -2; i < 3; i++){
       for (int j = -2; j < 3; j++){
         if (i != 0 && j != 0){
-          if(solveH(row+i,col+j,level+1)){
-            return true;
+          if(addKnight(row+i,col+j,level+1)){
+            return solveH(row+i,col+j,level+1);
           } else {
-            board[row][col] = 0;
+            removeKnight(row+i,col+j,level+1);
           }
         }
       }
