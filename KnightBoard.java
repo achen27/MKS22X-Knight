@@ -68,7 +68,7 @@ public class KnightBoard {
     return false;
   }
 
-  private boolean removeKnight(int row ,int col, int level){
+  private boolean removeKnight(int row ,int col){
     if (row < 0 || row > board.length - 1 || col < 0 || col > board.length - 1){
       return false;
     }
@@ -78,27 +78,56 @@ public class KnightBoard {
 
   private boolean solveH(int row ,int col, int level){
     if (level > board.length * board[0].length){
-      System.out.println("");
+      System.out.println("end reached");
       return true;
     }
-    board[row][col] = level;
     System.out.println(this.toString());
-    for (int i = -2; i < 3; i++){
-      for (int j = -2; j < 3; j++){
-        if (i != 0 && j != 0){
-          if(addKnight(row+i,col+j,level+1)){
-            return solveH(row+i,col+j,level+1);
-          } else {
-            removeKnight(row+i,col+j,level+1);
-          }
-        }
-      }
+
+    if(addKnight(row+1,col+2,level+1)){
+      return solveH(row+1,col+2,level+1);
     }
+    removeKnight(row+1,col+2);
+
+    if(addKnight(row+1,col-2,level+1)){
+      return solveH(row+1,col-2,level+1);
+    }
+    removeKnight(row+1,col-2);
+
+    if(addKnight(row+2,col+1,level+1)){
+      return solveH(row+2,col+1,level+1);
+    }
+    removeKnight(row+2,col+1);
+
+    if(addKnight(row+2,col-1,level+1)){
+      return solveH(row+2,col-1,level+1);
+    }
+    removeKnight(row+2,col-1);
+
+    if(addKnight(row-1,col+2,level+1)){
+      return solveH(row-1,col+2,level+1);
+    }
+    removeKnight(row-1,col+2);
+
+    if(addKnight(row-1,col-2,level+1)){
+      return solveH(row-1,col-2,level+1);
+    }
+    removeKnight(row-1,col-2);
+
+    if(addKnight(row-2,col+1,level+1)){
+      return solveH(row-2,col+1,level+1);
+    }
+    removeKnight(row-2,col+1);
+
+    if(addKnight(row-2,col-1,level+1)){
+      return solveH(row-2,col-1,level+1);
+    }
+    removeKnight(row-2,col-1);
+
     return false;
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(3,3);
+    KnightBoard test = new KnightBoard(5,5);
     System.out.println(test.solve(0,0));
 
   }
