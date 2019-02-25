@@ -53,7 +53,6 @@ public class KnightBoard {
     if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board[0].length - 1){
       throw new IllegalArgumentException();
     }
-    board[startingRow][startingCol] = 1;
     return solveH(startingRow, startingCol, 1);
   }
 
@@ -174,14 +173,34 @@ public class KnightBoard {
       }
       //System.out.println(this.toString());
     }
-    System.out.println(level);
+    //System.out.println(level);
     removeKnight(row,col);
     return false;
   }
 
+  /**
+  *@throws IllegalStateException when the board contains non-zero values.
+  *@throws IllegalArgumentException when either parameter is negative or out of bounds.
+  *@return the number of solutions from the starting position specified
+  */
+  /*public int countSolutions(int startingRow, int startingCol){
+    for (int i = 0; i < board.length; i++){
+      for (int j = 0; j < board[0].length; j++){
+        if (board[i][j] != 0){
+          throw new IllegalStateException("board contains non-zero values");
+        }
+      }
+    }
+    if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board[0].length - 1){
+      throw new IllegalArgumentException();
+    }
+    board[startingRow][startingCol] = 1;
+    return solveH(startingRow, startingCol, 1);
+  }*/
+
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(5,5);
-    System.out.println(test.solve(4,4));
+    KnightBoard test = new KnightBoard(7,7);
+    System.out.println(test.solve(0,0));
     System.out.println(test);
 
     /*System.out.println(test.addKnight(0,4,1));
