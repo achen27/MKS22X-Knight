@@ -51,6 +51,17 @@ public class KnightBoard {
     }
   }
 
+  public String getBoard(){
+    String s = "";
+    for (int i = 0; i < moves.length; i++){
+      for (int j = 0; j < moves[0].length; j++){
+        s += moves[i][j] + " ";
+      }
+      s += "\n";
+    }
+    return s;
+  }
+
   public String toString(){
     String s = "";
     for (int i = 0; i < board.length; i++){
@@ -314,9 +325,10 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(6,6);
-    System.out.println(test.countSolutions(0,0));
+    KnightBoard test = new KnightBoard(7,7);
+    //System.out.println(test.countSolutions(0,0));
     System.out.println(test);
+    System.out.println(test.getBoard());
 
     /*System.out.println(test.addKnight(0,4,1));
     System.out.println(test);
