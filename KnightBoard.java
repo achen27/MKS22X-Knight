@@ -183,7 +183,7 @@ public class KnightBoard {
   *@throws IllegalArgumentException when either parameter is negative or out of bounds.
   *@return the number of solutions from the starting position specified
   */
-  /*public int countSolutions(int startingRow, int startingCol){
+  public int countSolutions(int startingRow, int startingCol){
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[0].length; j++){
         if (board[i][j] != 0){
@@ -194,13 +194,92 @@ public class KnightBoard {
     if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board[0].length - 1){
       throw new IllegalArgumentException();
     }
-    board[startingRow][startingCol] = 1;
-    return solveH(startingRow, startingCol, 1);
-  }*/
+    return countH(startingRow, startingCol, 1, 0);
+  }
+
+  private int countH(int row ,int col, int level, int count){
+    if (level >= board.length * board[0].length){
+      //System.out.println("end reached");
+      count++;
+      return count;
+    }
+    addKnight(row,col,level);
+    for (int i = 0; i < 8 ; i++){
+
+      if (i == 0){
+        //System.out.println("0");
+        //System.out.println(this.toString());
+        if(addKnight(row+1,col+2,level+1)){
+          count = countH(row+1,col+2,level+1,count);
+          removeKnight(row+1,col+2);
+        }
+      }
+
+      if (i == 1){
+        //System.out.println("1");
+        if(addKnight(row+1,col-2,level+1)){
+          count = countH(row+1,col-2,level+1,count);
+          removeKnight(row+1,col-2);
+        }
+      }
+
+      if (i == 2){
+        //System.out.println("2");
+        if(addKnight(row+2,col+1,level+1)){
+          count = countH(row+2,col+1,level+1,count);
+          removeKnight(row+2,col+1);
+        }
+       }
+
+      if (i == 3){
+        //System.out.println("3");
+        if(addKnight(row+2,col-1,level+1)){
+          count = countH(row+2,col-1,level+1,count);
+          removeKnight(row+2,col-1);
+        }
+      }
+
+      if (i == 4){
+        //System.out.println("4");
+        if(addKnight(row-1,col+2,level+1)){
+          count = countH(row+1,col-2,level+1,count);
+          removeKnight(row+1,col-2);
+        }
+      }
+
+      if (i == 5){
+        //System.out.println("5");
+        if(addKnight(row-1,col-2,level+1)){
+          count = countH(row-1,col-2,level+1,count);
+          removeKnight(row-1,col-2);
+        }
+      }
+
+      if (i == 6){
+        //System.out.println("6");
+        if(addKnight(row-2,col+1,level+1)){
+          count = countH(row-2,col+1,level+1,count);
+          removeKnight(row-2,col+1);
+        }
+      }
+
+      if (i == 7){
+        //System.out.println("7");
+        if(addKnight(row-2,col-1,level+1)){
+          count = countH(row-2,col-1,level+1,count);
+          removeKnight(row-2,col-1);
+        }
+      }
+      //System.out.println(this.toString());
+    }
+    //System.out.println(level);
+    removeKnight(row,col);
+    return count;
+  }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(7,7);
-    System.out.println(test.solve(0,0));
+    KnightBoard test = new KnightBoard(5,5);
+    System.out.println(test.countSolutions(0,0));
     System.out.println(test);
 
     /*System.out.println(test.addKnight(0,4,1));
