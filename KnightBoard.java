@@ -77,7 +77,7 @@ public class KnightBoard {
   }
 
   private boolean solveH(int row ,int col, int level){
-    if (level > board.length * board[0].length){
+    if (level >= board.length * board[0].length){
       //System.out.println("end reached");
       return true;
     }
@@ -174,14 +174,14 @@ public class KnightBoard {
       }
       //System.out.println(this.toString());
     }
-    //System.out.println(col);
+    System.out.println(level);
     removeKnight(row,col);
     return false;
   }
 
   public static void main(String[] args){
     KnightBoard test = new KnightBoard(5,5);
-    System.out.println(test.solve(0,0));
+    System.out.println(test.solve(4,4));
     System.out.println(test);
 
     /*System.out.println(test.addKnight(0,4,1));
