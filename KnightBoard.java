@@ -199,7 +199,6 @@ public class KnightBoard {
 
   private int countH(int row ,int col, int level, int count){
     if (level >= board.length * board[0].length){
-      //System.out.println("end reached");
       count++;
       return count;
     }
@@ -242,8 +241,8 @@ public class KnightBoard {
       if (i == 4){
         //System.out.println("4");
         if(addKnight(row-1,col+2,level+1)){
-          count = countH(row+1,col-2,level+1,count);
-          removeKnight(row+1,col-2);
+          count = countH(row-1,col+2,level+1,count);
+          removeKnight(row-1,col+2);
         }
       }
 
