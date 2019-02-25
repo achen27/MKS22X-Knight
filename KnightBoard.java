@@ -86,12 +86,12 @@ public class KnightBoard {
 
       if (i == 0){
         //System.out.println("0");
+        //System.out.println(this.toString());
         if(addKnight(row+1,col+2,level+1)){
           if(solveH(row+1,col+2,level+1)){
             return true;
           } else {
             removeKnight(row+1,col+2);
-            return false;
           }
         }
       }
@@ -103,7 +103,6 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row+1,col-2);
-            return false;
           }
         }
       }
@@ -115,7 +114,6 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row+2,col+1);
-            return false;
           }
         }
        }
@@ -127,7 +125,6 @@ public class KnightBoard {
             return true;
           }else {
              removeKnight(row+2,col-1);
-             return false;
            }
         }
       }
@@ -139,7 +136,6 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row-1,col+2);
-            return false;
           }
         }
       }
@@ -151,7 +147,6 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row-1,col-2);
-            return false;
           }
         }
       }
@@ -163,7 +158,6 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row-2,col+1);
-            return false;
           }
         }
       }
@@ -175,13 +169,12 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row-2,col-1);
-            return false;
           }
         }
       }
       //System.out.println(this.toString());
     }
-    System.out.println(col);
+    //System.out.println(col);
     removeKnight(row,col);
     return false;
   }
