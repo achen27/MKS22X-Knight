@@ -13,6 +13,42 @@ public class KnightBoard {
         board[i][j] = 0;
       }
     }
+
+    moves = new int[startingRows][startingCols];
+    for (int i = 0; i < startingRows; i++){
+
+      if (i == 0 || i == startingRows - 1){
+        for (int j = 0; j < startingCols; j++){
+          if (j == 0 || j == startingRows - 1) {
+            moves[i][j] = 2;
+          } else if (j == 1 || j == startingRows - 2){
+            moves[i][j] = 3;
+          } else {
+            moves[i][j] = 4;
+          }
+        }
+      } else if (i == 1 || i == startingRows - 2){
+        for (int j = 0; j < startingCols; j++){
+          if (j == 0 || j == startingRows - 1) {
+            moves[i][j] = 3;
+          } else if (j == 1 || j == startingRows - 2){
+            moves[i][j] = 4;
+          } else {
+            moves[i][j] = 6;
+          }
+        }
+      } else {
+        for (int j = 0; j < startingCols; j++){
+          if (j == 0 || j == startingRows - 1) {
+            moves[i][j] = 4;
+          } else if (j == 1 || j == startingRows - 2){
+            moves[i][j] = 6;
+          } else {
+            moves[i][j] = 8;
+          }
+        }
+      }
+    }
   }
 
   public String toString(){
