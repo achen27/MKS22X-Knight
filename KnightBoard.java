@@ -1,6 +1,7 @@
 public class KnightBoard {
 
   private int[][] board;
+  private int[][] moves;
 
   public KnightBoard(int startingRows,int startingCols){
     if (startingRows <= 0 || startingCols <= 0){
@@ -277,7 +278,7 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(5,5);
+    KnightBoard test = new KnightBoard(6,6);
     System.out.println(test.countSolutions(0,0));
     System.out.println(test);
 
