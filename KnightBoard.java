@@ -135,10 +135,12 @@ public class KnightBoard {
         //System.out.println("0");
         //System.out.println(this.toString());
         if(addKnight(row+1,col+2,level+1)){
+          moves[row+1][col+2] -= 1;
           if(solveH(row+1,col+2,level+1)){
             return true;
           } else {
             removeKnight(row+1,col+2);
+            moves[row+1][col+2] += 1;
           }
         }
       }
@@ -146,10 +148,12 @@ public class KnightBoard {
       if (i == 1){
         //System.out.println("1");
         if(addKnight(row+1,col-2,level+1)){
+          moves[row+1][col-2] -= 1;
           if(solveH(row+1,col-2,level+1)){
             return true;
           } else {
             removeKnight(row+1,col-2);
+            moves[row+1][col-2] += 1;
           }
         }
       }
@@ -157,10 +161,12 @@ public class KnightBoard {
       if (i == 2){
         //System.out.println("2");
         if(addKnight(row+2,col+1,level+1)){
+          moves[row+2][col+1] -= 1;
           if(solveH(row+2,col+1,level+1)){
             return true;
           } else {
             removeKnight(row+2,col+1);
+            moves[row+2][col+1] += 1;
           }
         }
        }
@@ -168,10 +174,12 @@ public class KnightBoard {
       if (i == 3){
         //System.out.println("3");
         if(addKnight(row+2,col-1,level+1)){
+          moves[row+2][col-1] -= 1;
           if(solveH(row+2,col-1,level+1)){
             return true;
           }else {
              removeKnight(row+2,col-1);
+             moves[row+1][col-1] += 1;
            }
         }
       }
@@ -179,10 +187,12 @@ public class KnightBoard {
       if (i == 4){
         //System.out.println("4");
         if(addKnight(row-1,col+2,level+1)){
+          moves[row-1][col+2] -= 1;
           if(solveH(row-1,col+2,level+1)){
             return true;
           } else {
             removeKnight(row-1,col+2);
+            moves[row-1][col+2] += 1;
           }
         }
       }
@@ -190,10 +200,12 @@ public class KnightBoard {
       if (i == 5){
         //System.out.println("5");
         if(addKnight(row-1,col-2,level+1)){
+          moves[row-1][col-2] -= 1;
           if(solveH(row-1,col-2,level+1)){
             return true;
           } else {
             removeKnight(row-1,col-2);
+            moves[row-1][col-2] += 1;
           }
         }
       }
@@ -201,10 +213,12 @@ public class KnightBoard {
       if (i == 6){
         //System.out.println("6");
         if(addKnight(row-2,col+1,level+1)){
+          moves[row-2][col+1] -= 1;
           if(solveH(row-2,col+1,level+1)){
             return true;
           } else {
             removeKnight(row-2,col+1);
+            moves[row-2][col+1] += 1;
           }
         }
       }
@@ -212,10 +226,12 @@ public class KnightBoard {
       if (i == 7){
         //System.out.println("7");
         if(addKnight(row-2,col-1,level+1)){
+          moves[row-2][col-1] -= 1;
           if(solveH(row-2,col-1,level+1)){
             return true;
           } else {
             removeKnight(row-2,col-1);
+            moves[row-2][col-1] += 1;
           }
         }
       }
@@ -327,6 +343,10 @@ public class KnightBoard {
   public static void main(String[] args){
     KnightBoard test = new KnightBoard(7,7);
     //System.out.println(test.countSolutions(0,0));
+    System.out.println(test);
+    System.out.println(test.getBoard());
+
+    System.out.println(test.solve(0,0));
     System.out.println(test);
     System.out.println(test.getBoard());
 
