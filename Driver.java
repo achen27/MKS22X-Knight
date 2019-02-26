@@ -6,7 +6,7 @@ public class Driver {
 			KnightBoard b = new KnightBoard(r, r);
 			long startTime = System.nanoTime();
 			try {
-				if (r == 51 || r == 52)
+				if (r == 45 || r == 47 || r == 50 || r == 54)
 					time = "skipped";
 				else if (b.solve(0, 0))
 					time = Math.round((System.nanoTime()-startTime)/10000.)/100.+"ms";

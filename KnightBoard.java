@@ -245,69 +245,10 @@ public class KnightBoard {
     addKnight(row,col,level);
     for (int i = 0; i < 8 ; i++){
 
-      if (i == 0){
-        //System.out.println("0");
-        //System.out.println(this.toString());
-        if(addKnight(row+1,col+2,level+1)){
-          count = countH(row+1,col+2,level+1,count);
-          removeKnight(row+1,col+2);
-        }
-      }
-
-      if (i == 1){
-        //System.out.println("1");
-        if(addKnight(row+1,col-2,level+1)){
-          count = countH(row+1,col-2,level+1,count);
-          removeKnight(row+1,col-2);
-        }
-      }
-
-      if (i == 2){
-        //System.out.println("2");
-        if(addKnight(row+2,col+1,level+1)){
-          count = countH(row+2,col+1,level+1,count);
-          removeKnight(row+2,col+1);
-        }
-       }
-
-      if (i == 3){
-        //System.out.println("3");
-        if(addKnight(row+2,col-1,level+1)){
-          count = countH(row+2,col-1,level+1,count);
-          removeKnight(row+2,col-1);
-        }
-      }
-
-      if (i == 4){
-        //System.out.println("4");
-        if(addKnight(row-1,col+2,level+1)){
-          count = countH(row-1,col+2,level+1,count);
-          removeKnight(row-1,col+2);
-        }
-      }
-
-      if (i == 5){
-        //System.out.println("5");
-        if(addKnight(row-1,col-2,level+1)){
-          count = countH(row-1,col-2,level+1,count);
-          removeKnight(row-1,col-2);
-        }
-      }
-
-      if (i == 6){
-        //System.out.println("6");
-        if(addKnight(row-2,col+1,level+1)){
-          count = countH(row-2,col+1,level+1,count);
-          removeKnight(row-2,col+1);
-        }
-      }
-
-      if (i == 7){
-        //System.out.println("7");
-        if(addKnight(row-2,col-1,level+1)){
-          count = countH(row-2,col-1,level+1,count);
-          removeKnight(row-2,col-1);
-        }
+      //System.out.println("7");
+      if(addKnight(row + x[i],col + y[i],level+1)){
+        count = countH(row + x[i],col + y[i],level+1,count);
+        removeKnight(row + x[i],col + y[i]);
       }
       //System.out.println(this.toString());
     }
@@ -317,12 +258,12 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(8,8);
+    KnightBoard test = new KnightBoard(5,6);
     //System.out.println(test.countSolutions(0,0));
     //System.out.println(test);
     System.out.println(test.getBoard());
 
-    System.out.println(test.solve(0,0));
+    System.out.println(test.count(0,0));
     System.out.println(test);
     //System.out.println(test.getBoard());
 
