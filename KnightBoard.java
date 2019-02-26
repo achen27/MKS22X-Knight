@@ -371,10 +371,10 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(6,5);
+    KnightBoard test = new KnightBoard(30,80);
     //System.out.println(test.countSolutions(0,0));
-    System.out.println(test);
-    System.out.println(test.getBoard());
+    //System.out.println(test);
+    //System.out.println(test.getBoard());
 
     System.out.println(test.solve(0,0));
     System.out.println(test);
