@@ -21,9 +21,9 @@ public class KnightBoard {
 
       if (i == 0 || i == startingRows - 1){
         for (int j = 0; j < startingCols; j++){
-          if (j == 0 || j == startingRows - 1) {
+          if (j == 0 || j == startingCols - 1) {
             moves[i][j] = 2;
-          } else if (j == 1 || j == startingRows - 2){
+          } else if (j == 1 || j == startingCols - 2){
             moves[i][j] = 3;
           } else {
             moves[i][j] = 4;
@@ -31,9 +31,9 @@ public class KnightBoard {
         }
       } else if (i == 1 || i == startingRows - 2){
         for (int j = 0; j < startingCols; j++){
-          if (j == 0 || j == startingRows - 1) {
+          if (j == 0 || j == startingCols - 1) {
             moves[i][j] = 3;
-          } else if (j == 1 || j == startingRows - 2){
+          } else if (j == 1 || j == startingCols - 2){
             moves[i][j] = 4;
           } else {
             moves[i][j] = 6;
@@ -41,9 +41,9 @@ public class KnightBoard {
         }
       } else {
         for (int j = 0; j < startingCols; j++){
-          if (j == 0 || j == startingRows - 1) {
+          if (j == 0 || j == startingCols - 1) {
             moves[i][j] = 4;
-          } else if (j == 1 || j == startingRows - 2){
+          } else if (j == 1 || j == startingCols - 2){
             moves[i][j] = 6;
           } else {
             moves[i][j] = 8;
