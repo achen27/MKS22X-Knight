@@ -39,38 +39,38 @@ public class KnightBoard {
 
     moves = new int[startingRows][startingCols];
     for (int i = 0; i < startingRows; i++){
-
-      if (i == 0 || i == startingRows - 1){
-        for (int j = 0; j < startingCols; j++){
-          if (j == 0 || j == startingCols - 1) {
-            moves[i][j] = 2;
-          } else if (j == 1 || j == startingCols - 2){
-            moves[i][j] = 3;
-          } else {
-            moves[i][j] = 4;
+      //if (board. )
+        if (i == 0 || i == startingRows - 1){
+          for (int j = 0; j < startingCols; j++){
+            if (j == 0 || j == startingCols - 1) {
+              moves[i][j] = 2;
+            } else if (j == 1 || j == startingCols - 2){
+              moves[i][j] = 3;
+            } else {
+              moves[i][j] = 4;
+            }
+          }
+        } else if (i == 1 || i == startingRows - 2){
+          for (int j = 0; j < startingCols; j++){
+            if (j == 0 || j == startingCols - 1) {
+              moves[i][j] = 3;
+            } else if (j == 1 || j == startingCols - 2){
+              moves[i][j] = 4;
+            } else {
+              moves[i][j] = 6;
+            }
+          }
+        } else {
+          for (int j = 0; j < startingCols; j++){
+            if (j == 0 || j == startingCols - 1) {
+              moves[i][j] = 4;
+            } else if (j == 1 || j == startingCols - 2){
+              moves[i][j] = 6;
+            } else {
+              moves[i][j] = 8;
+            }
           }
         }
-      } else if (i == 1 || i == startingRows - 2){
-        for (int j = 0; j < startingCols; j++){
-          if (j == 0 || j == startingCols - 1) {
-            moves[i][j] = 3;
-          } else if (j == 1 || j == startingCols - 2){
-            moves[i][j] = 4;
-          } else {
-            moves[i][j] = 6;
-          }
-        }
-      } else {
-        for (int j = 0; j < startingCols; j++){
-          if (j == 0 || j == startingCols - 1) {
-            moves[i][j] = 4;
-          } else if (j == 1 || j == startingCols - 2){
-            moves[i][j] = 6;
-          } else {
-            moves[i][j] = 8;
-          }
-        }
-      }
     }
   }
 
@@ -245,15 +245,26 @@ public class KnightBoard {
     }
     ArrayList<OptimizedBoard> o = new ArrayList<OptimizedBoard>();
     for (int i = 0; i < 8 ; i++){
+      //System.out.println(i);
       int r = row + x[i];
       int c = col + y[i];
+      //System.out.println(r + " "+ c);
+
+      //System.out.println(r < 0);
+      //System.out.println(r > board.length - 1);
+      //System.out.println(c < 0);
+      //System.out.println(c > board[0].length - 1);
       if (!(r < 0 || r > board.length - 1 || c < 0 || c > board[0].length - 1)){
         OptimizedBoard square = new OptimizedBoard(moves, r, c);
         o.add(square);
+        //System.out.println("added");
       }
     }
     sortOrder(o);
-    for (int i = 0; i < 8 ; i++){
+    //System.out.println(row);
+    //System.out.println(col);
+    //System.out.println(o.size());
+    for (int i = 0; i < o.size(); i++){
       //System.out.println(this.toString());
       //System.out.println(this.getBoard());
       //System.out.println(row + " " + col);
@@ -371,14 +382,14 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(30,80);
+    KnightBoard test = new KnightBoard(4,4);
     //System.out.println(test.countSolutions(0,0));
     //System.out.println(test);
-    //System.out.println(test.getBoard());
+    System.out.println(test.getBoard());
 
     System.out.println(test.solve(0,0));
     System.out.println(test);
-    System.out.println(test.getBoard());
+    //System.out.println(test.getBoard());
 
     /*System.out.println(test.addKnight(0,4,1));
     System.out.println(test);
