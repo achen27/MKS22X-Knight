@@ -257,13 +257,13 @@ public class KnightBoard {
       //System.out.println(this.toString());
       //System.out.println(this.getBoard());
       //System.out.println(row + " " + col);
-      if(addKnight(row-x[i],col-y[i],level+1)){
-        updateMoves(row-x[i],col-y[i],0);
-        if(solveH(row-x[i],col-y[i],level+1)){
+      if(addKnight(o.get(i).getX(),o.get(i).getY(),level+1)){
+        updateMoves(o.get(i).getX(),o.get(i).getY(),0);
+        if(solveH(o.get(i).getX(),o.get(i).getY(),level+1)){
           return true;
         } else {
-          removeKnight(row-x[i],col-y[i]);
-          updateMoves(row-x[i],col-y[i],1);
+          removeKnight(o.get(i).getX(),o.get(i).getY());
+          updateMoves(o.get(i).getX(),o.get(i).getY(),1);
         }
       }
     }
