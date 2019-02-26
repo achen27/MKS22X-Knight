@@ -1,6 +1,3 @@
-import java.util.*;
-import java.util.ArrayList;
-
 public class OptimizedBoard{
   private int moves;
   private int x;

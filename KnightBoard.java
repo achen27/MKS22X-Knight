@@ -1,3 +1,6 @@
+import java.util.*;
+import java.util.ArrayList;
+
 public class KnightBoard {
 
   private int[][] board;
@@ -220,6 +223,18 @@ public class KnightBoard {
     }
   }
 
+  private void sortOrder(ArrayList<OptimizedBoard> o){
+    for (int i = 1; i < o.size(); i++){
+      OptimizedBoard temp = o.get(i);
+      int j = i;
+      while (j > 0 && o.get(j-1).getMoves() > temp.getMoves()){//shift until the number on the left is not larger
+        o.set(j, o.get(j-1));
+        j--;
+      }
+      o.set(j,temp);
+    }
+  }
+
   private boolean solveH(int row ,int col, int level){
     if (level >= board.length * board[0].length){
       //System.out.println("end reached");
@@ -228,117 +243,29 @@ public class KnightBoard {
     if (addKnight(row,col,level)){
       updateMoves(row,col,0);
     }
+    ArrayList<OptimizedBoard> o = new ArrayList<OptimizedBoard>();
+    for (int i = 0; i < 8 ; i++){
+      int r = row + x[i];
+      int c = col + y[i];
+      if (!(r < 0 || r > board.length - 1 || c < 0 || c > board[0].length - 1)){
+        OptimizedBoard square = new OptimizedBoard(moves, r, c);
+        o.add(square);
+      }
+    }
+    sortOrder(o);
     for (int i = 0; i < 8 ; i++){
       //System.out.println(this.toString());
       //System.out.println(this.getBoard());
       //System.out.println(row + " " + col);
-      if (i == 0){
-        //System.out.println("0");
-        //System.out.println(this.toString());
-        //System.out.println(this.getBoard());
-        //System.out.println(row + " " + col);
-        if(addKnight(row+1,col+2,level+1)){
-          updateMoves(row+1,col+2,0);
-          if(solveH(row+1,col+2,level+1)){
-            return true;
-          } else {
-            removeKnight(row+1,col+2);
-            updateMoves(row+1,col+2,1);
-          }
+      if(addKnight(row-x[i],col-y[i],level+1)){
+        updateMoves(row-x[i],col-y[i],0);
+        if(solveH(row-x[i],col-y[i],level+1)){
+          return true;
+        } else {
+          removeKnight(row-x[i],col-y[i]);
+          updateMoves(row-x[i],col-y[i],1);
         }
       }
-
-      if (i == 1){
-        //System.out.println("1");
-        if(addKnight(row+1,col-2,level+1)){
-          updateMoves(row+1,col-2,0);
-          if(solveH(row+1,col-2,level+1)){
-            return true;
-          } else {
-            removeKnight(row+1,col-2);
-            updateMoves(row+1,col-2,1);
-          }
-        }
-      }
-
-      if (i == 2){
-        //System.out.println("2");
-        if(addKnight(row+2,col+1,level+1)){
-          updateMoves(row+2,col+1,0);
-          if(solveH(row+2,col+1,level+1)){
-            return true;
-          } else {
-            removeKnight(row+2,col+1);
-            updateMoves(row+2,col+1,1);
-          }
-        }
-       }
-
-      if (i == 3){
-        //System.out.println("3");
-        if(addKnight(row+2,col-1,level+1)){
-          updateMoves(row+2,col-1,0);
-          if(solveH(row+2,col-1,level+1)){
-            return true;
-          }else {
-             removeKnight(row+2,col-1);
-             updateMoves(row+2,col-1,1);
-           }
-        }
-      }
-
-      if (i == 4){
-        //System.out.println("4");
-        if(addKnight(row-1,col+2,level+1)){
-          updateMoves(row-1,col+2,0);
-          if(solveH(row-1,col+2,level+1)){
-            return true;
-          } else {
-            removeKnight(row-1,col+2);
-            updateMoves(row-1,col+2,1);
-          }
-        }
-      }
-
-      if (i == 5){
-        //System.out.println("5");
-        if(addKnight(row-1,col-2,level+1)){
-          updateMoves(row-1,col-2,0);
-          if(solveH(row-1,col-2,level+1)){
-            return true;
-          } else {
-            removeKnight(row-1,col-2);
-            updateMoves(row-1,col-2,1);
-          }
-        }
-      }
-
-      if (i == 6){
-        //System.out.println("6");
-        if(addKnight(row-2,col+1,level+1)){
-          updateMoves(row-2,col+1,0);
-          if(solveH(row-2,col+1,level+1)){
-            return true;
-          } else {
-            removeKnight(row-2,col+1);
-            updateMoves(row-2,col+1,1);
-          }
-        }
-      }
-
-      if (i == 7){
-        //System.out.println("7");
-        if(addKnight(row-2,col-1,level+1)){
-          updateMoves(row-2,col-1,0);
-          if(solveH(row-2,col-1,level+1)){
-            return true;
-          } else {
-            removeKnight(row-2,col-1);
-            updateMoves(row-2,col-1,1);
-          }
-        }
-      }
-      //System.out.println(this.toString());
     }
     //System.out.println(level);
     removeKnight(row,col);
