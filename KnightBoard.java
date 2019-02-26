@@ -148,76 +148,11 @@ public class KnightBoard {
 
   private void updateMoves(int row, int col, int change){
     for (int i = 0; i < 8 ; i++){
-      if (i == 0){
-        if(!(row+1 < 0 || row+1 > board.length - 1 || col+2 < 0 || col+2 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row+1][col+2]--;
-          } else {
-            moves[row+1][col+2]++;
-          }
-        }
-      }
-      if (i == 1){
-        if(!(row+1 < 0 || row+1 > board.length - 1 || col-2 < 0 || col-2 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row+1][col-2]--;
-          } else {
-            moves[row+1][col-2]++;
-          }
-        }
-      }
-      if (i == 2){
-        if(!(row+2 < 0 || row+2 > board.length - 1 || col+1 < 0 || col+1 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row+2][col+1]--;
-          } else {
-            moves[row+2][col+1]++;
-          }
-        }
-      }
-      if (i == 3){
-        if(!(row+2 < 0 || row+2 > board.length - 1 || col-1 < 0 || col-1 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row+2][col-1]--;
-          } else {
-            moves[row+2][col-1]++;
-          }
-        }
-      }
-      if (i == 4){
-        if(!(row-1 < 0 || row-1 > board.length - 1 || col+2 < 0 || col+2 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row-1][col+2]--;
-          } else {
-            moves[row-1][col+2]++;
-          }
-        }
-      }
-      if (i == 5){
-        if(!(row-1 < 0 || row-1 > board.length - 1 || col-2 < 0 || col-2 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row-1][col-2]--;
-          } else {
-            moves[row-1][col-2]++;
-          }
-        }
-      }
-      if (i == 6){
-        if(!(row-2 < 0 || row-2 > board.length - 1 || col+1 < 0 || col+1 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row-2][col+1]--;
-          } else {
-            moves[row-2][col+1]++;
-          }
-        }
-      }
-      if (i == 7){
-        if(!(row-2 < 0 || row-2 > board.length - 1 || col-1 < 0 || col-1 > board[0].length - 1)){
-          if (change == 0) {
-            moves[row-2][col-1]--;
-          } else {
-            moves[row-2][col-1]++;
-          }
+    if(!(row + x[i] < 0 || row + x[i] > board.length - 1 || col + y[i] < 0 || col + y[i] > board[0].length - 1)){
+        if (change == 0) {
+          moves[row + x[i]][col + y[i]]--;
+        } else {
+          moves[row + x[i]][col + y[i]]++;
         }
       }
     }
@@ -382,7 +317,7 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(4,4);
+    KnightBoard test = new KnightBoard(8,8);
     //System.out.println(test.countSolutions(0,0));
     //System.out.println(test);
     System.out.println(test.getBoard());
