@@ -2,11 +2,11 @@ import java.util.Collections.*;
 import java.util.ArrayList;
 
 public class OptimizedBoard{
-  private ArrayList<Integer>[][] order;
+  private ArrayList<int[]> order;
   private int[] x;
   private int[] y;
 
-  public OptimizedBoard(int[][] board, int row, int col){
+  public OptimizedBoard(int[][] moves, int row, int col){
     x = new int[8];
     y = new int[8];
     x[0] = 1;
@@ -25,5 +25,12 @@ public class OptimizedBoard{
     y[6] = 1;
     x[7] = -2;
     y[7] = -1;
+    for(int i = 0; i < 8; i++){
+      int[] x = new int[3];
+      x[0] = moves[row][col];
+      x[1] = row + x[i];
+      x[2] = col + y[i];
+      order.add(x);
+    }
   }
 }
