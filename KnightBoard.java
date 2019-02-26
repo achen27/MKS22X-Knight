@@ -123,6 +123,83 @@ public class KnightBoard {
     return true;
   }
 
+  private void updateMoves(int row, int col, int change){
+    for (int i = 0; i < 8 ; i++){
+      if (i == 0){
+        if(!(row+1 < 0 || row+1 > board.length - 1 || col+2 < 0 || col+2 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row+1][col+2]--;
+          } else {
+            moves[row+1][col+2]++;
+          }
+        }
+      }
+      if (i == 1){
+        if(!(row+1 < 0 || row+1 > board.length - 1 || col-2 < 0 || col-2 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row+1][col-2]--;
+          } else {
+            moves[row+1][col-2]++;
+          }
+        }
+      }
+      if (i == 2){
+        if(!(row+2 < 0 || row+2 > board.length - 1 || col+1 < 0 || col+1 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row+2][col+1]--;
+          } else {
+            moves[row+2][col+1]++;
+          }
+        }
+      }
+      if (i == 3){
+        if(!(row+2 < 0 || row+2 > board.length - 1 || col-1 < 0 || col-1 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row+2][col-1]--;
+          } else {
+            moves[row+2][col-1]++;
+          }
+        }
+      }
+      if (i == 4){
+        if(!(row-1 < 0 || row-1 > board.length - 1 || col+2 < 0 || col+2 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row-1][col+2]--;
+          } else {
+            moves[row-1][col+2]++;
+          }
+        }
+      }
+      if (i == 5){
+        if(!(row-1 < 0 || row-1 > board.length - 1 || col-2 < 0 || col-2 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row-1][col-2]--;
+          } else {
+            moves[row-1][col-2]++;
+          }
+        }
+      }
+      if (i == 6){
+        if(!(row-2 < 0 || row-2 > board.length - 1 || col+1 < 0 || col+1 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row-2][col+1]--;
+          } else {
+            moves[row-2][col+1]++;
+          }
+        }
+      }
+      if (i == 7){
+        if(!(row-2 < 0 || row-2 > board.length - 1 || col-1 < 0 || col-1 > board[0].length - 1)){
+          if (change == 0) {
+            moves[row-2][col-1]--;
+          } else {
+            moves[row-2][col-1]++;
+          }
+        }
+      }
+    }
+  }
+
   private boolean solveH(int row ,int col, int level){
     if (level >= board.length * board[0].length){
       //System.out.println("end reached");
@@ -134,13 +211,14 @@ public class KnightBoard {
       if (i == 0){
         //System.out.println("0");
         //System.out.println(this.toString());
+        //System.out.println(this.getBoard());
         if(addKnight(row+1,col+2,level+1)){
-          moves[row+1][col+2] -= 1;
+          updateMoves(row+1,col+2,0);
           if(solveH(row+1,col+2,level+1)){
             return true;
           } else {
             removeKnight(row+1,col+2);
-            moves[row+1][col+2] += 1;
+            updateMoves(row+1,col+2,1);
           }
         }
       }
@@ -148,12 +226,10 @@ public class KnightBoard {
       if (i == 1){
         //System.out.println("1");
         if(addKnight(row+1,col-2,level+1)){
-          moves[row+1][col-2] -= 1;
           if(solveH(row+1,col-2,level+1)){
             return true;
           } else {
             removeKnight(row+1,col-2);
-            moves[row+1][col-2] += 1;
           }
         }
       }
@@ -161,12 +237,10 @@ public class KnightBoard {
       if (i == 2){
         //System.out.println("2");
         if(addKnight(row+2,col+1,level+1)){
-          moves[row+2][col+1] -= 1;
           if(solveH(row+2,col+1,level+1)){
             return true;
           } else {
             removeKnight(row+2,col+1);
-            moves[row+2][col+1] += 1;
           }
         }
        }
@@ -174,12 +248,10 @@ public class KnightBoard {
       if (i == 3){
         //System.out.println("3");
         if(addKnight(row+2,col-1,level+1)){
-          moves[row+2][col-1] -= 1;
           if(solveH(row+2,col-1,level+1)){
             return true;
           }else {
              removeKnight(row+2,col-1);
-             moves[row+1][col-1] += 1;
            }
         }
       }
@@ -187,12 +259,10 @@ public class KnightBoard {
       if (i == 4){
         //System.out.println("4");
         if(addKnight(row-1,col+2,level+1)){
-          moves[row-1][col+2] -= 1;
           if(solveH(row-1,col+2,level+1)){
             return true;
           } else {
             removeKnight(row-1,col+2);
-            moves[row-1][col+2] += 1;
           }
         }
       }
@@ -200,12 +270,10 @@ public class KnightBoard {
       if (i == 5){
         //System.out.println("5");
         if(addKnight(row-1,col-2,level+1)){
-          moves[row-1][col-2] -= 1;
           if(solveH(row-1,col-2,level+1)){
             return true;
           } else {
             removeKnight(row-1,col-2);
-            moves[row-1][col-2] += 1;
           }
         }
       }
@@ -218,7 +286,6 @@ public class KnightBoard {
             return true;
           } else {
             removeKnight(row-2,col+1);
-            moves[row-2][col+1] += 1;
           }
         }
       }
@@ -226,12 +293,10 @@ public class KnightBoard {
       if (i == 7){
         //System.out.println("7");
         if(addKnight(row-2,col-1,level+1)){
-          moves[row-2][col-1] -= 1;
           if(solveH(row-2,col-1,level+1)){
             return true;
           } else {
             removeKnight(row-2,col-1);
-            moves[row-2][col-1] += 1;
           }
         }
       }
@@ -341,7 +406,7 @@ public class KnightBoard {
   }
 
   public static void main(String[] args){
-    KnightBoard test = new KnightBoard(7,7);
+    KnightBoard test = new KnightBoard(5,5);
     //System.out.println(test.countSolutions(0,0));
     System.out.println(test);
     System.out.println(test.getBoard());
