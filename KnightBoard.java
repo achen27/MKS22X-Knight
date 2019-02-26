@@ -177,27 +177,27 @@ public class KnightBoard {
       updateMoves(row,col,0); //updates outgoing moves board if knight was added
     }
     ArrayList<OptimizedBoard> o = new ArrayList<OptimizedBoard>(); //List of objects
-    for (int i = 0; i < 8 ; i++){ //List of objects
+    for (int i = 0; i < 8 ; i++){ //all 8 ways to move a knight
       int r = row + x[i];
       int c = col + y[i];
-      if (!(r < 0 || r > board.length - 1 || c < 0 || c > board[0].length - 1)){
-        OptimizedBoard square = new OptimizedBoard(moves, r, c);
-        o.add(square);
+      if (!(r < 0 || r > board.length - 1 || c < 0 || c > board[0].length - 1)){ //checks if move is within board
+        OptimizedBoard square = new OptimizedBoard(moves, r, c); //creates new object with that square
+        o.add(square); //adds object to list
       }
     }
-    sortOrder(o);
-    for (int i = 0; i < o.size(); i++){
-      if(addKnight(o.get(i).getX(),o.get(i).getY(),level+1)){
-        updateMoves(o.get(i).getX(),o.get(i).getY(),0);
-        if(solveH(o.get(i).getX(),o.get(i).getY(),level+1)){
+    sortOrder(o); //sorts list from least to most number of outgoing moves
+    for (int i = 0; i < o.size(); i++){ //loops through list
+      if(addKnight(o.get(i).getX(),o.get(i).getY(),level+1)){ //checks to see if knight can be added
+        updateMoves(o.get(i).getX(),o.get(i).getY(),0); //updates outgoing moves board
+        if(solveH(o.get(i).getX(),o.get(i).getY(),level+1)){ //recursion
           return true;
         } else {
-          removeKnight(o.get(i).getX(),o.get(i).getY());
-          updateMoves(o.get(i).getX(),o.get(i).getY(),1);
+          removeKnight(o.get(i).getX(),o.get(i).getY()); //removes knight from square
+          updateMoves(o.get(i).getX(),o.get(i).getY(),1); //updates outgoing moves board
         }
       }
     }
-    removeKnight(row,col);
+    removeKnight(row,col); //removes knight from square
     return false;
   }
 
@@ -207,7 +207,7 @@ public class KnightBoard {
   *@return the number of solutions from the starting position specified
   */
   public int countSolutions(int startingRow, int startingCol){
-    for (int i = 0; i < board.length; i++){
+    for (int i = 0; i < board.length; i++){ //checks to make sure board starts empty
       for (int j = 0; j < board[0].length; j++){
         if (board[i][j] != 0){
           throw new IllegalStateException("board contains non-zero values");
@@ -215,35 +215,29 @@ public class KnightBoard {
       }
     }
     if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board[0].length - 1){
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(); //checks to make sure parameters are within the board
     }
-    return countH(startingRow, startingCol, 1, 0);
+    return countH(startingRow, startingCol, 1, 0); //helper function
   }
 
-  private int countH(int row ,int col, int level, int count){
-    if (level >= board.length * board[0].length){
-      count++;
+  private int countH(int row ,int col, int level, int count){ //helper function for count
+    if (level >= board.length * board[0].length){ //one permutation found
+      count++; //count increases by one
       return count;
     }
-    addKnight(row,col,level);
-    for (int i = 0; i < 8 ; i++){
-
-      //System.out.println("7");
-      if(addKnight(row + x[i],col + y[i],level+1)){
-        count = countH(row + x[i],col + y[i],level+1,count);
-        removeKnight(row + x[i],col + y[i]);
+    addKnight(row,col,level); //add knight to board
+    for (int i = 0; i < 8 ; i++){ //checks all possible moves
+      if(addKnight(row + x[i],col + y[i],level+1)){ //checks to see if knight can be added
+        count = countH(row + x[i],col + y[i],level+1,count); //recursion
+        removeKnight(row + x[i],col + y[i]); //removes knight from board
       }
-      //System.out.println(this.toString());
     }
-    //System.out.println(level);
-    removeKnight(row,col);
+    removeKnight(row,col); //removes knight from board
     return count;
   }
 
   public static void main(String[] args){
     KnightBoard test = new KnightBoard(5,6);
-    //System.out.println(test.countSolutions(0,0));
-    //System.out.println(test);
     System.out.println(test.getBoard());
 
     System.out.println(test.countSolutions(0,0));
