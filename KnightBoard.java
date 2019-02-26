@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class KnightBoard {
 
-  private int[][] board;
-  private int[][] moves;
-  private int[] x;
-  private int[] y;
+  private int[][] board; //keeps track of knight moves
+  private int[][] moves; //keeps track of number of outgoing moves from each square
+  private int[] x; //keeps track of rows (8 ways)
+  private int[] y; //keeps track of cols (8 ways)
 
   public KnightBoard(int startingRows,int startingCols){
-    x = new int[8];
-    y = new int[8];
+    x = new int[8]; //initializes rows (8 ways)
+    y = new int[8]; //initializes rows (8 ways)
     x[0] = 1;
     y[0] = 2;
     x[1] = 1;
@@ -27,54 +27,53 @@ public class KnightBoard {
     y[6] = 1;
     x[7] = -2;
     y[7] = -1;
-    if (startingRows <= 0 || startingCols <= 0){
+    if (startingRows <= 0 || startingCols <= 0){ //exception for negative numbers
       throw new IllegalArgumentException("Negative Parameters");
     }
     board = new int[startingRows][startingCols];
-    for (int i = 0; i < startingRows; i++){
+    for (int i = 0; i < startingRows; i++){ //fills board with zeros
       for (int j = 0; j < startingCols; j++){
         board[i][j] = 0;
       }
     }
 
     moves = new int[startingRows][startingCols];
-    for (int i = 0; i < startingRows; i++){
-      //if (board. )
-        if (i == 0 || i == startingRows - 1){
-          for (int j = 0; j < startingCols; j++){
-            if (j == 0 || j == startingCols - 1) {
-              moves[i][j] = 2;
-            } else if (j == 1 || j == startingCols - 2){
-              moves[i][j] = 3;
-            } else {
-              moves[i][j] = 4;
-            }
-          }
-        } else if (i == 1 || i == startingRows - 2){
-          for (int j = 0; j < startingCols; j++){
-            if (j == 0 || j == startingCols - 1) {
-              moves[i][j] = 3;
-            } else if (j == 1 || j == startingCols - 2){
-              moves[i][j] = 4;
-            } else {
-              moves[i][j] = 6;
-            }
-          }
-        } else {
-          for (int j = 0; j < startingCols; j++){
-            if (j == 0 || j == startingCols - 1) {
-              moves[i][j] = 4;
-            } else if (j == 1 || j == startingCols - 2){
-              moves[i][j] = 6;
-            } else {
-              moves[i][j] = 8;
-            }
+    for (int i = 0; i < startingRows; i++){ //fills outgoing moves board with proper numbers
+      if (i == 0 || i == startingRows - 1){ //first and last rows have pattern 2 3 4 ... 4 3 2
+        for (int j = 0; j < startingCols; j++){
+          if (j == 0 || j == startingCols - 1) {
+            moves[i][j] = 2;
+          } else if (j == 1 || j == startingCols - 2){
+            moves[i][j] = 3;
+          } else {
+            moves[i][j] = 4;
           }
         }
+      } else if (i == 1 || i == startingRows - 2){ //second and second to last rows have pattern 3 4 6 ... 6 4 3
+        for (int j = 0; j < startingCols; j++){
+          if (j == 0 || j == startingCols - 1) {
+            moves[i][j] = 3;
+          } else if (j == 1 || j == startingCols - 2){
+            moves[i][j] = 4;
+          } else {
+            moves[i][j] = 6;
+          }
+        }
+      } else { //other rows have pattern 4 6 8 ... 8 6 4
+        for (int j = 0; j < startingCols; j++){
+          if (j == 0 || j == startingCols - 1) {
+            moves[i][j] = 4;
+          } else if (j == 1 || j == startingCols - 2){
+            moves[i][j] = 6;
+          } else {
+            moves[i][j] = 8;
+          }
+        }
+      }
     }
   }
 
-  public String getBoard(){
+  public String getBoard(){ //debugging method to check what outgoing moves board looks like
     String s = "";
     for (int i = 0; i < moves.length; i++){
       for (int j = 0; j < moves[0].length; j++){
@@ -85,7 +84,7 @@ public class KnightBoard {
     return s;
   }
 
-  public String toString(){
+  public String toString(){ //method to print what board looks like
     String s = "";
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[0].length; j++){
@@ -114,7 +113,7 @@ public class KnightBoard {
   *@return true when the board is solvable from the specified starting position
   */
   public boolean solve(int startingRow, int startingCol){
-    for (int i = 0; i < board.length; i++){
+    for (int i = 0; i < board.length; i++){ //checks to make sure board starts empty
       for (int j = 0; j < board[0].length; j++){
         if (board[i][j] != 0){
           throw new IllegalStateException("board contains non-zero values");
@@ -122,87 +121,72 @@ public class KnightBoard {
       }
     }
     if (startingRow < 0 || startingRow > board.length - 1 || startingCol < 0 || startingCol > board[0].length - 1){
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(); //checks to make sure parameters are within the board
     }
-    return solveH(startingRow, startingCol, 1);
+    return solveH(startingRow, startingCol, 1); //helper function
   }
 
-  private boolean addKnight(int row ,int col, int level){
+  private boolean addKnight(int row ,int col, int level){ //helper function to add a knight on a square
     if (row < 0 || row > board.length - 1 || col < 0 || col > board[0].length - 1){
-      return false;
+      return false; //checks to make sure parameters are within the board
     }
-    if (board[row][col] == 0){
+    if (board[row][col] == 0){ //checks to make sure square is empty
       board[row][col] = level;
       return true;
     }
-    return false;
+    return false; //square already has a knight
   }
 
-  private boolean removeKnight(int row ,int col){
+  private boolean removeKnight(int row ,int col){ //helper function to remove a knight from a square
     if (row < 0 || row > board.length - 1 || col < 0 || col > board[0].length - 1){
-      return false;
+      return false; //checks to make sure parameters are within the board
     }
-    board[row][col] = 0;
+    board[row][col] = 0; //sets square to 0 to remove knight
     return true;
   }
 
-  private void updateMoves(int row, int col, int change){
+  private void updateMoves(int row, int col, int change){ //helper method to modify outgoing moves board
     for (int i = 0; i < 8 ; i++){
-    if(!(row + x[i] < 0 || row + x[i] > board.length - 1 || col + y[i] < 0 || col + y[i] > board[0].length - 1)){
-        if (change == 0) {
-          moves[row + x[i]][col + y[i]]--;
-        } else {
-          moves[row + x[i]][col + y[i]]++;
+      if(!(row + x[i] < 0 || row + x[i] > board.length - 1 || col + y[i] < 0 || col + y[i] > board[0].length - 1)){ //checks to make sure parameters are within the board
+        if (change == 0){ //when a knight was added
+          moves[row + x[i]][col + y[i]]--; //subtract one from surrounding squares
+        } else { //when a knight was removed
+          moves[row + x[i]][col + y[i]]++; //add one to surrounding squares
         }
       }
     }
   }
 
-  private void sortOrder(ArrayList<OptimizedBoard> o){
+  private void sortOrder(ArrayList<OptimizedBoard> o){ //helper method to sort order of moves (insertion sort)
     for (int i = 1; i < o.size(); i++){
-      OptimizedBoard temp = o.get(i);
+      OptimizedBoard temp = o.get(i); //holds temporary value
       int j = i;
-      while (j > 0 && o.get(j-1).getMoves() > temp.getMoves()){//shift until the number on the left is not larger
-        o.set(j, o.get(j-1));
+      while (j > 0 && o.get(j-1).getMoves() > temp.getMoves()){ //shift until the number on the left is not larger
+        o.set(j, o.get(j-1)); //moves value to proper position
         j--;
       }
-      o.set(j,temp);
+      o.set(j,temp); //places old value to where new value was
     }
   }
 
-  private boolean solveH(int row ,int col, int level){
-    if (level >= board.length * board[0].length){
-      //System.out.println("end reached");
+  private boolean solveH(int row ,int col, int level){ //helper method for solve
+    if (level >= board.length * board[0].length){ //board has been filled
       return true;
     }
-    if (addKnight(row,col,level)){
-      updateMoves(row,col,0);
+    if (addKnight(row,col,level)){ //adds a knight a current position if possible
+      updateMoves(row,col,0); //updates outgoing moves board if knight was added
     }
-    ArrayList<OptimizedBoard> o = new ArrayList<OptimizedBoard>();
-    for (int i = 0; i < 8 ; i++){
-      //System.out.println(i);
+    ArrayList<OptimizedBoard> o = new ArrayList<OptimizedBoard>(); //List of objects
+    for (int i = 0; i < 8 ; i++){ //List of objects
       int r = row + x[i];
       int c = col + y[i];
-      //System.out.println(r + " "+ c);
-
-      //System.out.println(r < 0);
-      //System.out.println(r > board.length - 1);
-      //System.out.println(c < 0);
-      //System.out.println(c > board[0].length - 1);
       if (!(r < 0 || r > board.length - 1 || c < 0 || c > board[0].length - 1)){
         OptimizedBoard square = new OptimizedBoard(moves, r, c);
         o.add(square);
-        //System.out.println("added");
       }
     }
     sortOrder(o);
-    //System.out.println(row);
-    //System.out.println(col);
-    //System.out.println(o.size());
     for (int i = 0; i < o.size(); i++){
-      //System.out.println(this.toString());
-      //System.out.println(this.getBoard());
-      //System.out.println(row + " " + col);
       if(addKnight(o.get(i).getX(),o.get(i).getY(),level+1)){
         updateMoves(o.get(i).getX(),o.get(i).getY(),0);
         if(solveH(o.get(i).getX(),o.get(i).getY(),level+1)){
@@ -213,7 +197,6 @@ public class KnightBoard {
         }
       }
     }
-    //System.out.println(level);
     removeKnight(row,col);
     return false;
   }
@@ -263,7 +246,7 @@ public class KnightBoard {
     //System.out.println(test);
     System.out.println(test.getBoard());
 
-    System.out.println(test.count(0,0));
+    System.out.println(test.countSolutions(0,0));
     System.out.println(test);
     //System.out.println(test.getBoard());
 
